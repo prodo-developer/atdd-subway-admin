@@ -11,8 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static nextstep.subway.utils.SectionAcceptanceTestRequest.*;
-import static nextstep.subway.utils.SectionAcceptanceTestResponse.지하철_노선_구간_등록_예외_케이스로_등록되지_않음;
-import static nextstep.subway.utils.SectionAcceptanceTestResponse.지하철_노선에_지하철역_제거됨;
+import static nextstep.subway.utils.SectionAcceptanceTestResponse.*;
 
 @DisplayName("지하철 노선에 역 제거 관련 기능")
 public class SectionRemoveAcceptanceTest extends AcceptanceTest {
@@ -63,7 +62,7 @@ public class SectionRemoveAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> response = 노선에_지하철역_제거_요청(노선ID, 낙성대역ID);
 
         // then
-        지하철_노선_구간_등록_예외_케이스로_등록되지_않음(response);
+        지하철_노선_구간_제거_예외_케이스로_제거되지_않음(response);
     }
 
     @DisplayName("구간이 하나인 노선에서 마지막 구간을 제거할 때 제거 할 수 없음")
@@ -73,6 +72,6 @@ public class SectionRemoveAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> response = 노선에_지하철역_제거_요청(노선ID, 서울대입구역ID);
 
         // then
-        지하철_노선_구간_등록_예외_케이스로_등록되지_않음(response);
+        지하철_노선_구간_제거_예외_케이스로_제거되지_않음(response);
     }
 }

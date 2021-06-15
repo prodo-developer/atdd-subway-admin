@@ -80,8 +80,6 @@ public class Line extends BaseEntity {
     }
 
     private void removeStation(Station removePossibleStation) {
-
-        // 개선 전
         Optional<Section> upLineStation = getUpLineStation(removePossibleStation);
         Optional<Section> downLineStation = getDownLineStation(removePossibleStation);
 

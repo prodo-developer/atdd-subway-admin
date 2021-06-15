@@ -10,11 +10,11 @@ public class ErrorAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
-    public void handleIllegalArgumentException() {
+    public void handleIllegalArgumentException(IllegalArgumentException e) {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalStateException.class)
-    public void handleIllegalStateException() {
+    public void handleIllegalStateException(IllegalArgumentException e) {
     }
 }

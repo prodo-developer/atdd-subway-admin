@@ -54,32 +54,36 @@ public class LineService {
     }
 
     public LineResponse updateLine(Long lineId, LineRequest lineRequest) {
-        Line line = lineRepository.findById(lineId).orElseThrow(() -> new LineNotFoundException("존재하지 않는 노선입니다."));
+        Line line = findLine(lineId);
         line.update(lineRequest.toLine());
         return LineResponse.of(line);
     }
 
     public void deleteLine(Long lineId) {
-        lineRepository.findById(lineId).orElseThrow(() -> new LineNotFoundException("존재하지 않는 노선입니다."));
+        findLine(lineId);
         lineRepository.deleteById(lineId);
     }
 
     private Line findResponseDomainById(Long id) {
-        return lineRepository.findById(id).orElseThrow(() -> new LineNotFoundException("존재하지 않는 노선입니다."));
+        return findLine(id);
     }
 
 
     public SectionResponse addSection(Long lineId, SectionRequest sectionRequest) {
-        Line line = lineRepository.findById(lineId).orElseThrow(() -> new LineNotFoundException("존재하지 않는 노선입니다."));
-        Station upStation = stationService.findById(sectionRequest.getUpStationId());
-        Station downStation = stationService.findById(sectionRequest.getDownStationId());
+        Line line = findLine(lineId);
+        Station upStation = stationService.findDomainById(sectionRequest.getUpStationId());
+        Station downStation = stationService.findDomainById(sectionRequest.getDownStationId());
         Section section = line.addSection(upStation, downStation, sectionRequest.getDistance());
         return SectionResponse.of(section);
     }
 
     public void removeSectionByStationId(Long lineId, Long stationId) {
-        Line line = lineRepository.findById(lineId).orElseThrow(() -> new LineNotFoundException("존재하지 않는 노선입니다."));
-        Station station = stationService.findById(stationId);
+        Line line = findLine(lineId);
+        Station station = stationService.findDomainById(stationId);
         line.removeStationInSection(station);
+    }
+
+    private Line findLine(Long lineId) {
+        return lineRepository.findById(lineId).orElseThrow(() -> new LineNotFoundException("존재하지 않는 노선입니다."));
     }
 }

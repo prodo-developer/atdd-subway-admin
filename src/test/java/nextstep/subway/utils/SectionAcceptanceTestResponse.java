@@ -22,6 +22,6 @@ public class SectionAcceptanceTestResponse {
     }
 
     public static void 지하철_노선_구간_제거_예외_케이스로_제거되지_않음(ExtractableResponse<Response> response) {
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 }
